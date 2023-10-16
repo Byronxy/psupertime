@@ -1110,6 +1110,7 @@ psupertime <- function(x, y, y_labels=NULL, assay_type='logcounts',
 	beta_dt 	= data.table( beta=best_beta, symbol=names(best_beta) )
 	beta_dt[, abs_beta := abs(beta) ]
 	setorder(beta_dt, -abs_beta)
+	beta_dt <- beta_dt[!duplicated(beta_dt$symbol), ]
 	beta_dt[, symbol:=factor(symbol, levels=beta_dt$symbol)]
 		
 	return(beta_dt)
